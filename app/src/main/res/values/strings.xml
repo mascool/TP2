@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TP2</string>
+    <string name="note">Note</string>
+    <string name="titre">Titre</string>
 </resources>
