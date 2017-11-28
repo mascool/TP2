@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<NoteActivity> noteActivities = new ArrayList<NoteActivity>();
         noteActivities.add(new NoteActivity("Nouvelle Note", df.format(Calendar.getInstance().getTime()),""));
 
-        //set le RecyclerView
+        //set le RecyclerView/
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(new MyAdapter(noteActivities));
     }
