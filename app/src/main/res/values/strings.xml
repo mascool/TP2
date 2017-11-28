@@ -3,4 +3,7 @@
     <string name="note">Note</string>
     <string name="titre">Titre</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="blocNote">Le Bloc-Note</string>
+    <string name="application_cr_e_par">Application créée par</string>
+    <string name="version_beta">Version beta</string>
 </resources>
