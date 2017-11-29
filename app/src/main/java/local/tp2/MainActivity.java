@@ -97,10 +97,10 @@ public class MainActivity extends AppCompatActivity {
 
             //Afficher l'unité (dans le bouton)
             public void display(NoteActivity noteActivityy) {
-                currentNote = noteActivityy;
-                titre.setText(noteActivityy.getTitre());
-                date.setText(noteActivityy.getDate());
-                ligne1.setText(noteActivityy.getLigne1());
+                this.currentNote = noteActivityy;
+                this.titre.setText(noteActivityy.getTitre());
+                this.date.setText(noteActivityy.getDate());
+                this.ligne1.setText(noteActivityy.getLigne1());
             }
         }
 

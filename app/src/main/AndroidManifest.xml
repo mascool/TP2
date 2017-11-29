@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NoteActivity"> </activity>
+        <activity android:name=".NoteActivity"></activity>
+        <activity android:name=".CouleursActivity"></activity>
     </application>
 
 </manifest>
