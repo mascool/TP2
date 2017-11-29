@@ -22,16 +22,16 @@
 
         <TextView
             android:id="@+id/date"
-            android:layout_width="wrap_content"
+            android:layout_width="11dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="date" />
 
         <TextView
-            android:id="@+id/ligne1"
+            android:id="@+id/apercuLigne1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="5"
             android:text="ligne1" />
     </LinearLayout>
 </LinearLayout>

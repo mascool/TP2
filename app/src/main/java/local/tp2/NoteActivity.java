@@ -103,6 +103,7 @@ public class NoteActivity extends AppCompatActivity {
 
         /////////////COMMENT TROUVER LA PREMIERE LIGNE??? YÉ RENDU MINUIT PI CA ME TENTE PAS D'ESSAYER DE TROUVER//////////////
 
+
         //currentNote.
 
         this.ligne1 = ligne1;

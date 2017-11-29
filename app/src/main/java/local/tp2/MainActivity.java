@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
                 titre = ((TextView) itemView.findViewById(R.id.titre));
                 date = ((TextView) itemView.findViewById(R.id.date));
-                ligne1 = ((TextView) itemView.findViewById(R.id.ligne1));
+                ligne1 = ((TextView) itemView.findViewById(R.id.apercuLigne1));
 
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -106,4 +106,32 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.aPropos:
+
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.a_propos, (ViewGroup) findViewById(R.id.customToast) );
+
+                Toast toast = new Toast(getApplicationContext());
+
+                toast.setView(layout);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.show();
+                return true;
+
+            default :
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
