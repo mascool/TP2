@@ -26,6 +26,10 @@ import java.util.Calendar;
 
 public class NoteActivity extends AppCompatActivity {
 
+    private Note note;
+    public NoteActivity(Note note) {
+        this.note = note;
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,7 @@ public class NoteActivity extends AppCompatActivity {
         ImageButton supprimer = (ImageButton)findViewById(R.id.supprimer);
         ImageButton reglage = (ImageButton)findViewById(R.id.reglage);
         ImageButton ajouter = (ImageButton)findViewById(R.id.ajouter);
+        EditText titre = (EditText)findViewById(R.id.titreNote);
 
         //Listener pour supprimer la note
         supprimer.setOnClickListener(new View.OnClickListener() {

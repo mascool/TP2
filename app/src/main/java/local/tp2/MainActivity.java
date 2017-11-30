@@ -2,6 +2,7 @@ package local.tp2;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<Note> notes;
+    public ArrayList<Note> notes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -120,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -142,7 +142,12 @@ public class MainActivity extends AppCompatActivity {
                 toast.setDuration(Toast.LENGTH_LONG);
                 toast.show();
                 return true;
-
+            case R.id.funFacts:
+                new android.app.AlertDialog.Builder(getApplicationContext())
+                        .setTitle("@string/faits_amusants !")
+                        .setMessage("Saviez-vous que cette section a ete cree dans le seul but " +
+                                "de faire plaisir a Alexandre.")
+                        .show();
             default :
                 return super.onOptionsItemSelected(item);
         }
