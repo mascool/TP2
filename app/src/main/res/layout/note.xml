@@ -2,8 +2,10 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    tools:context="local.tp2.NoteActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,18 +20,20 @@
             android:ems="10"
             android:hint="@string/titre"
             android:inputType="textPersonName"
-            android:textSize="20dp"
+            android:textCursorDrawable="@android:color/black"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editText2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:ems="10"
             android:gravity="start"
             android:hint="@string/note"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textCursorDrawable="@android:color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"

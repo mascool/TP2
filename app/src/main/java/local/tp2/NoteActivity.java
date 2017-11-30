@@ -26,16 +26,6 @@ import java.util.Calendar;
 
 public class NoteActivity extends AppCompatActivity {
 
-    private String titre;
-    private String date;
-    private String ligne1;
-
-    public NoteActivity(String titre, String date, String ligne1) {
-
-        this.titre = titre;
-        this.date = date;
-        this.ligne1 = ligne1;
-    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,36 +67,5 @@ public class NoteActivity extends AppCompatActivity {
 
     }
 
-    public String getTitre() {
-        return titre;
-    }
-
-    public void setTitre(String titre){
-        this.titre = titre;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(){
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
-        String date = df.format(Calendar.getInstance().getTime());
-        this.date = date;
-    }
-
-    public String getLigne1() {
-        return ligne1;
-    }
-
-    public void setLigne1(NoteActivity currentNote){
-
-        /////////////COMMENT TROUVER LA PREMIERE LIGNE??? YÉ RENDU MINUIT PI CA ME TENTE PAS D'ESSAYER DE TROUVER//////////////
-
-
-        //currentNote.
-
-        this.ligne1 = ligne1;
-    }
 
 }
