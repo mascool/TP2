@@ -16,7 +16,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -96,12 +99,22 @@ public class MainActivity extends AppCompatActivity {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        String content = "";
+                        try {
+                            InputStream inputStream = openFileInput(itemView.getContext().toString());
+                            if ( inputStream != null) {
+                                InputStreamReader tmp = new InputStreamReader( inputStream );
+                                BufferedReader reader = new BufferedReader(tmp);
+                                String str;
+                                StringBuilder buf = new StringBuilder();
+                                while ((str = reader.readLine()) != null) {
+                                    buf.append(str + "\n");
+                                } inputStream .close();;
+                                content = buf.toString();
+                            }
+                        } catch (java.io.FileNotFoundException e) {} catch (Throwable t) {
 
-                        //OUVRIR LA NOTE OU ON A CLIQUÉ
-
-
-
-
+                        }
 
                     }
                 });
@@ -118,9 +131,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
