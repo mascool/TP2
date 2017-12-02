@@ -1,7 +1,8 @@
 package local.tp2;
 
-import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,47 +10,58 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-
+    public ArrayList<Note> notes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        notes = new ArrayList<Note>();
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         final RecyclerView rv = (RecyclerView) findViewById(R.id.list);
 
-        //Arraylist des Notes
-        ArrayList<NoteActivity> noteActivities = new ArrayList<NoteActivity>();
-        noteActivities.add(new NoteActivity("Nouvelle Note", df.format(Calendar.getInstance().getTime()),""));
+
+        FloatingActionButton nouvelleNoteB = (FloatingActionButton)findViewById(R.id.nouvelleNote);
+        nouvelleNoteB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                notes.add(new Note());
+                Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         //set le RecyclerView/
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new MyAdapter(noteActivities));
+        rv.setAdapter(new MyAdapter(notes));
+
     }
+
 
     private class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
-        private ArrayList<NoteActivity> noteActivities;
-        public MyAdapter(ArrayList<NoteActivity> noteActivities) {this.noteActivities = noteActivities;
+        private ArrayList<Note> notes;
+        public MyAdapter(ArrayList<Note> notes1) {this.notes = notes1;
         }
 
         @Override
         //Compte le numero du bouton
-        public int getItemCount() {return noteActivities.size();}
+        public int getItemCount() {return notes.size();}
 
         @Override
         //Layout dans le boutons
@@ -61,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
-            NoteActivity noteActivity = noteActivities.get(position);
-            holder.display(noteActivity);
+            Note noteActivity = notes.get(position);
+            //holder.display(noteActivity);
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -96,16 +108,19 @@ public class MainActivity extends AppCompatActivity {
             }
 
             //Afficher l'unité (dans le bouton)
-            public void display(NoteActivity noteActivityy) {
-                this.currentNote = noteActivityy;
-                this.titre.setText(noteActivityy.getTitre());
-                this.date.setText(noteActivityy.getDate());
-                this.ligne1.setText(noteActivityy.getLigne1());
-            }
+            /*public void display(NoteActivity noteActivityy) {
+                currentNote = noteActivityy;
+                titre.setText(Note.getTitre());
+                date.setText(Note.getDate());
+                ligne1.setText(Note.contenu());
+            }*/
         }
 
 
     }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -128,7 +143,12 @@ public class MainActivity extends AppCompatActivity {
                 toast.setDuration(Toast.LENGTH_LONG);
                 toast.show();
                 return true;
-
+            case R.id.funFacts:
+                new android.app.AlertDialog.Builder(getApplicationContext())
+                        .setTitle("@string/faits_amusants !")
+                        .setMessage("Saviez-vous que cette section a ete cree dans le seul but " +
+                                "de faire plaisir a Alexandre.")
+                        .show();
             default :
                 return super.onOptionsItemSelected(item);
         }

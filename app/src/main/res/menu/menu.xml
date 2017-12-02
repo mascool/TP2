@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/aPropos"
-        android:title="À propos"
+        android:title="@string/propos"
         app:showAsAction="never"/>
     <item
         android:id="@+id/funFacts"
-        android:title="Faits amusants"
+        android:title="@string/faits_amusants"
         app:showAsAction="never"/>
 
 </menu>
