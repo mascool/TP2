@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/titre"
-            android:inputType="textPersonName"
+            android:inputType="textCapWords|textPersonName"
             android:textCursorDrawable="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -32,7 +32,7 @@
             android:ems="10"
             android:gravity="start"
             android:hint="@string/note"
-            android:inputType="textMultiLine"
+            android:inputType="textCapSentences|textMultiLine"
             android:textCursorDrawable="@android:color/black" />
 
         <LinearLayout

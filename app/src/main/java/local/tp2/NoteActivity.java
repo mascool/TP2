@@ -37,15 +37,9 @@ import java.util.Calendar;
  */
 
 public class NoteActivity extends AppCompatActivity {
-
     private Note note;
 
-
-
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note);
         ActionBar actionBar= getSupportActionBar();
@@ -93,6 +87,15 @@ public class NoteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
+                EditText titre = (EditText) findViewById(R.id.titreNote);
+                EditText contenu = (EditText)findViewById(R.id.contenuNote);
+
+                Intent intent = new Intent(NoteActivity.this, MainActivity.class);
+                intent.putExtra("TITRE", titre.getText().toString());
+                intent.putExtra("CONTENU", contenu.getText().toString());
+                intent.putExtra("CHEMIN", titre.getText().toString() + ".txt");
+
+                /*
                 EditText titre = (EditText)findViewById(R.id.titreNote);
                 EditText contenu = (EditText)findViewById(R.id.contenuNote);
                 String filename = ("fileOut_test1.txt");
@@ -109,7 +112,7 @@ public class NoteActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                FileInputStream fis = getApplicationContext().openFileInput(filename, Context.MODE_PRIVATE);
+                /*FileInputStream fis = getApplicationContext().openFileInput(filename, Context.MODE_PRIVATE);
                 InputStreamReader isr = new InputStreamReader(fis);
                 BufferedReader bufferedReader = new BufferedReader(isr);
                 StringBuilder sb = new StringBuilder();
@@ -122,7 +125,7 @@ public class NoteActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                Log.e("allo", sb.toString());
+                Log.e("allo", sb.toString());*/
                 onBackPressed();
                 return true;
         }

@@ -1,5 +1,6 @@
 package local.tp2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -16,43 +17,77 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-    public ArrayList<Note> notes;
+    private final String FCONFIG = "database.txt";
+
+    private ArrayList<Note> notes;
+
+    private RecyclerView rv;
+    private FloatingActionButton nouvelleNoteB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        notes = new ArrayList<Note>();
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final RecyclerView rv = (RecyclerView) findViewById(R.id.list);
+
+        // INITIALISATION DES NOTES
+        notes = new ArrayList<Note>();
 
 
-        FloatingActionButton nouvelleNoteB = (FloatingActionButton)findViewById(R.id.nouvelleNote);
-        nouvelleNoteB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        // INITIALISATION DU FICHIER
+        File fConfig = new File(getApplicationContext().getFilesDir(), FCONFIG);
+        if(fConfig.exists()){
+            ecrireFichier(lireFichier());
+        }
 
-                notes.add(new Note());
-                Intent intent = new Intent(MainActivity.this, NoteActivity.class);
-                startActivity(intent);
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if (extras == null) {
+                // PASS
+            } else {
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
+                notes.add(new Note(extras.getString("TITRE"),df.format(Calendar.getInstance().getTime()) , extras.getString("CONTENU"), extras.getString("CHEMIN")));
 
             }
-        });
+        } else {
+            // PASS
+        }
 
-        //set le RecyclerView/
+
+        // INITIALISATION DE TOUS LES WIDGETS
+        rv = (RecyclerView) findViewById(R.id.list);
+        nouvelleNoteB = (FloatingActionButton)findViewById(R.id.nouvelleNote);
+
+
+        // MISE EN PLACE DU RECYCLER VIEW
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(new MyAdapter(notes));
 
+        nouvelleNoteB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
+    // CRÉATION D'UN ADAPTER
     private class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         private ArrayList<Note> notes;
@@ -120,8 +155,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
+    // MISE EN PLACE DU MENU
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -154,4 +188,52 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // ÉCRIRE LE FICHIER
+    public void ecrireFichier(String nomFichier) {
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FCONFIG, Context.MODE_APPEND);
+            fos.write(nomFichier.getBytes());
+            //System.out.println("Écriture dans le fichier "+FCONFIG+" réussie");
+            //System.out.println("config écrite : " + nomFichier);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch(IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    // LIRE FICHIER
+    public String lireFichier() {
+        InputStream instream = openFileInput(FCONFIG);
+        try {
+            InputStreamReader inputreader = new InputStreamReader(instream);
+            BufferedReader buffreader = new BufferedReader(inputreader);
+            String line, line1 = "";
+            while ((line = buffreader.readLine()) != null)
+                line1+=line;
+
+            return line;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (fis != null)
+                    fis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
