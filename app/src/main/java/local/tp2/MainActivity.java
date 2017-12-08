@@ -25,15 +25,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private final String FCONFIG = "database.txt";
 
     private ArrayList<Note> notes;
+    private ArrayList<String> fichiers;
 
     private RecyclerView rv;
     private FloatingActionButton nouvelleNoteB;
@@ -51,7 +58,11 @@ public class MainActivity extends AppCompatActivity {
         // INITIALISATION DU FICHIER
         File fConfig = new File(getApplicationContext().getFilesDir(), FCONFIG);
         if(fConfig.exists()){
-            ecrireFichier(lireFichier());
+            fichiers = lireFichier();
+            for (int i = 0; i< fichiers.size(); i++ ){
+                notes.add(new Note(fichiers.get(i)));
+            }
+
         }
 
         if (savedInstanceState == null) {
@@ -61,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
                 notes.add(new Note(extras.getString("TITRE"),df.format(Calendar.getInstance().getTime()) , extras.getString("CONTENU"), extras.getString("CHEMIN")));
+
 
             }
         } else {
@@ -192,8 +204,9 @@ public class MainActivity extends AppCompatActivity {
     public void ecrireFichier(String nomFichier) {
         FileOutputStream fos = null;
         try {
-            fos = openFileOutput(FCONFIG, Context.MODE_APPEND);
-            fos.write(nomFichier.getBytes());
+            final Path path = Paths.get(FCONFIG);
+            Files.write(path, Arrays.asList(nomFichier), StandardCharsets.UTF_8,
+                    Files.exists(path) ? StandardOpenOption.APPEND : StandardOpenOption.CREATE);
             //System.out.println("Écriture dans le fichier "+FCONFIG+" réussie");
             //System.out.println("config écrite : " + nomFichier);
         } catch (FileNotFoundException e) {
@@ -211,17 +224,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     // LIRE FICHIER
-    public String lireFichier() {
+    public ArrayList<String> lireFichier() {
         FileInputStream fis = null;
+        ArrayList<String> fichiers = new ArrayList<String>();
         try {
             fis = openFileInput(FCONFIG);
             InputStreamReader inputreader = new InputStreamReader(fis);
             BufferedReader buffreader = new BufferedReader(inputreader);
-            String line, line1 = "";
+            String line = "";
             while ((line = buffreader.readLine()) != null)
-                line1+=line;
+                fichiers.add(line);
 
-            return line;
+            return fichiers;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;

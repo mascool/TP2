@@ -13,6 +13,10 @@ public class Note {
         this.chemin = chemin;
     }
 
+    public Note(String chemin) {
+        this.chemin = chemin;
+    }
+
     public String getTitre() {
         return titre;
     }
