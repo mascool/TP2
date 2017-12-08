@@ -212,9 +212,10 @@ public class MainActivity extends AppCompatActivity {
 
     // LIRE FICHIER
     public String lireFichier() {
-        InputStream instream = openFileInput(FCONFIG);
+        FileInputStream fis = null;
         try {
-            InputStreamReader inputreader = new InputStreamReader(instream);
+            fis = openFileInput(FCONFIG);
+            InputStreamReader inputreader = new InputStreamReader(fis);
             BufferedReader buffreader = new BufferedReader(inputreader);
             String line, line1 = "";
             while ((line = buffreader.readLine()) != null)
