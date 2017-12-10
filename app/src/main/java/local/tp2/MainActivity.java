@@ -156,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                    notesBDD.getLivreWithTitre(titre.toString());//donner le titre dans le TextView
+                        notesBDD.getLivreWithTitre(titre.toString());//donner le titre dans le TextView
+
                     }
                 });
             }

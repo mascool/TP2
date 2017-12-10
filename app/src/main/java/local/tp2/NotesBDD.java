@@ -1,9 +1,11 @@
 package local.tp2;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 public class NotesBDD {
     private static final int VERSION_BDD = 1;
