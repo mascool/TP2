@@ -13,4 +13,8 @@
     <string name="sans_titre">Sans titre</string>
     <string name="faits_amusants">Faits amusants</string>
     <string name="propos">À propos</string>
+    <string name="couleurs">Couleurs</string>
+    <string name="taille">Taille</string>
+    <string name="police">Police</string>
+    <string name="appliquer">Appliquer</string>
 </resources>

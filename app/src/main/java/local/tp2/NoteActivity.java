@@ -1,7 +1,9 @@
 package local.tp2;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.ActionBar;
@@ -65,8 +67,8 @@ public class NoteActivity extends AppCompatActivity {
         reglage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //ACCEDER AUX REGLAGES
+                Intent intent = new Intent(NoteActivity.this, SettingActivity.class);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -131,4 +133,36 @@ public class NoteActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+
+        if (requestCode == 1){
+            if (resultCode == Activity.RESULT_OK){
+                EditText contenu = (EditText) findViewById(R.id.contenuNote);
+                String color = data.getStringExtra("COLOR");
+                String size = data.getStringExtra("SIZE");
+                String font = data.getStringExtra("FONT");
+                if (!color.equals("")){
+                    if (color.equals("black")){
+                        contenu.setTextColor(Color.parseColor("#000000"));
+                    }else if (color.equals("blue")){
+                        contenu.setTextColor(Color.parseColor("#3F48CC"));
+                    }else if (color.equals("red")){
+                        contenu.setTextColor(Color.parseColor("#EC1C24"));
+                    }else if (color.equals("green")){
+                        contenu.setTextColor(Color.parseColor("#0ED145"));
+                    }else if (color.equals("yellow")){
+                        contenu.setTextColor(Color.parseColor("#FFF200"));
+                    }
+                }
+                if(!size.equals("")){
+                    contenu.setTextSize(Float.parseFloat(size));
+                }
+                if(!font.equals("")){
+                    //contenu.setTypeface(Typeface.);
+                }
+
+            }
+        }
+    }
 }
