@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                    notesBDD.getLivreWithTitre(itemView.getContext());//donner le titre dans le TextView
+                    notesBDD.getLivreWithTitre(titre.toString());//donner le titre dans le TextView
                     }
                 });
             }
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // ÉCRIRE LE FICHIER
-    public void ecrireFichier(String nomFichier) {
+    /*public void ecrireFichier(String nomFichier) {
         FileOutputStream fos = null;
         try {
             final Path path = Paths.get(FCONFIG);
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-    }//On aurait plus besoin d'écrire le fichier, car il serait dans la BDD
+    }//On aurait plus besoin d'écrire le fichier, car il serait dans la BDD*/
 
 
     // LIRE FICHIER
