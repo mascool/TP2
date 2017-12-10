@@ -6,6 +6,10 @@ public class Note {
     private String contenu;
     private String chemin;
 
+    public Note(){
+        this("", "", "", "");
+    }
+
     public Note(String titre, String date, String contenu, String chemin) {
         this.titre = titre;
         this.date = date;

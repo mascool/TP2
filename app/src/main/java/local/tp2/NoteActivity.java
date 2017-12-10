@@ -57,7 +57,6 @@ public class NoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //SUPPRIMER LA NOTE
 
             }
         });

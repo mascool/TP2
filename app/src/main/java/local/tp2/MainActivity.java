@@ -45,11 +45,20 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rv;
     private FloatingActionButton nouvelleNoteB;
 
+    private  NotesBDD notesBDD;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        notesBDD = new NotesBDD(getApplicationContext());
+
+        Note note = new Note();
+
+        notesBDD.open();
+
+        notesBDD.insertNote(note);
 
         // INITIALISATION DES NOTES
         notes = new ArrayList<Note>();
@@ -61,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             fichiers = lireFichier();
             for (int i = 0; i< fichiers.size(); i++ ){
                 notes.add(new Note(fichiers.get(i)));
+                notesBDD.insertNote(new Note(fichiers.get(i)));
             }
 
         }
@@ -72,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
                 notes.add(new Note(extras.getString("TITRE"),df.format(Calendar.getInstance().getTime()) , extras.getString("CONTENU"), extras.getString("CHEMIN")));
-
+                notesBDD.insertNote(new Note(extras.getString("TITRE"),df.format(Calendar.getInstance().getTime()) , extras.getString("CONTENU"), extras.getString("CHEMIN")));
 
             }
         } else {
@@ -88,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         // MISE EN PLACE DU RECYCLER VIEW
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(new MyAdapter(notes));
+        //rv.setAdapter(new MyAdapter(notesBDD));
 
         nouvelleNoteB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,13 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        //OUVRIR LA NOTE OU ON A CLIQUÉ
-
-
-
-
-
+                    notesBDD.getLivreWithTitre(itemView.getContext());//donner le titre dans le TextView
                     }
                 });
             }
@@ -220,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-    }
+    }//On aurait plus besoin d'écrire le fichier, car il serait dans la BDD
 
 
     // LIRE FICHIER
@@ -250,5 +255,5 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-    }
+    }//La lecture du fichier se ferait grâce dans la classe NotesBDD
 }
