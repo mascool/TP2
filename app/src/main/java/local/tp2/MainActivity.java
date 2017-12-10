@@ -30,6 +30,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.sql.DatabaseMetaData;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         notesBDD.insertNote(note);
 
         // INITIALISATION DES NOTES
-        notes = new ArrayList<Note>();
+        //notes = new ArrayList<Note>();
 
 
         // INITIALISATION DU FICHIER
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         if(fConfig.exists()){
             fichiers = lireFichier();
             for (int i = 0; i< fichiers.size(); i++ ){
-                notes.add(new Note(fichiers.get(i)));
+                //notes.add(new Note(fichiers.get(i)));
                 notesBDD.insertNote(new Note(fichiers.get(i)));
             }
 
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 // PASS
             } else {
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
-                notes.add(new Note(extras.getString("TITRE"),df.format(Calendar.getInstance().getTime()) , extras.getString("CONTENU"), extras.getString("CHEMIN")));
+                //notes.add(new Note(extras.getString("TITRE"),df.format(Calendar.getInstance().getTime()) , extras.getString("CONTENU"), extras.getString("CHEMIN")));
                 notesBDD.insertNote(new Note(extras.getString("TITRE"),df.format(Calendar.getInstance().getTime()) , extras.getString("CONTENU"), extras.getString("CHEMIN")));
 
             }
@@ -112,8 +113,9 @@ public class MainActivity extends AppCompatActivity {
 
     // CRÉATION D'UN ADAPTER
     private class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-
+        //Ici je sais pas comment l'arraylist est ulitisé, puisqu'il ne semble pas hériter de qqch
         private ArrayList<Note> notes;
+        private NotesBDD notesBDD;
         public MyAdapter(ArrayList<Note> notes1) {this.notes = notes1;
         }
 
