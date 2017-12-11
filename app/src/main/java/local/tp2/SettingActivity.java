@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class SettingActivity extends AppCompatActivity {
         ImageButton buttonYlo = (ImageButton) findViewById(R.id.buttonYlo);
         ImageButton buttonGre = (ImageButton) findViewById(R.id.buttonGre);
         Button buttonApp = (Button) findViewById(R.id.buttonAppliquer);
+
         color = "";
         size = "";
         font = "";
@@ -63,6 +65,11 @@ public class SettingActivity extends AppCompatActivity {
         buttonApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Spinner spinnerSize = (Spinner) findViewById(R.id.spinnerSize);
+                Spinner spinnerFont = (Spinner) findViewById(R.id.spinnerFont);
+                size = spinnerSize.getSelectedItem().toString();
+                font = spinnerFont.getSelectedItem().toString();
+
                 Intent intent = new Intent(SettingActivity.this, NoteActivity.class);
                 intent.putExtra("COLOR", color);
                 intent.putExtra("SIZE", size);

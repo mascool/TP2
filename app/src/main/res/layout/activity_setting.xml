@@ -64,10 +64,27 @@
         android:text="@string/taille"
         android:textSize="18sp" />
 
-    <Spinner
-        android:id="@+id/spinnerSize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/spinnerSizeItems"/>
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:fontFamily="serif"
+            android:text="@string/sp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView5"
@@ -80,7 +97,8 @@
     <Spinner
         android:id="@+id/spinnerFont"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:entries="@array/spinnerFontItems"/>
 
     <Button
         android:id="@+id/buttonAppliquer"
@@ -90,4 +108,5 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="30dp"
         android:text="@string/appliquer" />
+
 </LinearLayout>

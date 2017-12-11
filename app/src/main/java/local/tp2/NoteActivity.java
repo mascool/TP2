@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.ActionBar;
@@ -51,7 +52,7 @@ public class NoteActivity extends AppCompatActivity {
         //Initialisation des Boutons cliquables
         ImageButton supprimer = (ImageButton)findViewById(R.id.supprimer);
         ImageButton reglage = (ImageButton)findViewById(R.id.reglage);
-        ImageButton ajouter = (ImageButton)findViewById(R.id.ajouter);
+        ImageButton save = (ImageButton)findViewById(R.id.save);
 
 
         //Listener pour supprimer la note
@@ -73,7 +74,7 @@ public class NoteActivity extends AppCompatActivity {
         });
 
         //Listener pour ajouter une nouvelle note
-        ajouter.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -159,7 +160,18 @@ public class NoteActivity extends AppCompatActivity {
                     contenu.setTextSize(Float.parseFloat(size));
                 }
                 if(!font.equals("")){
-                    //contenu.setTypeface(Typeface.);
+                    if (color.equals("Serif")){
+                        contenu.setTypeface(Typeface.createFromAsset(getAssets(),"font/sans-serif.ttf"));
+                    }else if (color.equals("Casual")){
+                        contenu.setTypeface(Typeface.createFromAsset(getAssets(),"font/casual.ttf"));
+                    }else if (color.equals("Aclonica")){
+                        contenu.setTypeface(Typeface.createFromAsset(getAssets(),"font/aclonica.ttf"));
+                    }else if (color.equals("Caesar Dressing")){
+                        contenu.setTypeface(Typeface.createFromAsset(getAssets(),"font/caesar_dressing.ttf"));
+                    }else if (color.equals("Homemade Apple")){
+                        contenu.setTypeface(Typeface.createFromAsset(getAssets(),"font/homemade_apple.ttf"));
+                    }
+
                 }
 
             }

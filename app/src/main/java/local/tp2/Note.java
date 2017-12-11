@@ -21,6 +21,8 @@ public class Note {
         this.chemin = chemin;
     }
 
+
+
     public String getTitre() {
         return titre;
     }

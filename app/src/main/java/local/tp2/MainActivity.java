@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        notes = new ArrayList<Note>();
+        notes.add(new Note());
 
         notesBDD = new NotesBDD(getApplicationContext());
 
@@ -121,7 +123,10 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         //Compte le numero du bouton
-        public int getItemCount() {return notes.size();}
+        public int getItemCount() {
+            //return 10;
+            return notes.size();
+        }
 
         @Override
         //Layout dans le boutons
